@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+	<title>Document</title>
+</head>
+<body>
+	     <div class="container">
+			  <input type="text" id="input_data" placeholder="ENTER ITEMS">
+			  <input type="button" value="ADD ITEM" id="btn">
+		 </div>
+</body>
+
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+		font-family:arvo;
+		font-size: 20px;
+		border-radius: 5px;
+	}
+
+	body{
+		background-image: url("pattern-randomized.svg");
+		background-size: cover;
+	}
+
+	.container{
+		min-height:80px;
+		width: 44%;
+		margin: 5% 28%;
+	}
+
+	.container > input:nth-child(1){
+         outline:1px solid black;
+		 border: none;
+		 border-top-left-radius: 5px;
+		 border-top-right-radius: 5px;
+		 border-bottom-left-radius:0px;
+		 border-bottom-right-radius:0px;
+	}
+
+	.container > input:nth-child(2){
+         outline: 1px solid black;
+		 border: none;
+		 margin-bottom: 10px;
+		 border-top-left-radius: 0px;
+		 border-top-right-radius: 0px;
+		 border-bottom-left-radius:5px;
+		 border-bottom-right-radius:5px;
+	}
+	.container div{
+		position: relative;
+		height: 40px;
+		width:100%;
+		margin:1px;
+		padding-top: 8px;
+		text-align: center;
+		text-transform:uppercase;
+		transition: 0.5s linear;
+		color:black;
+		font-weight: 100;
+		/* backdrop-filter: blur(8px) saturate(180%);
+       -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(25, 36, 56, 0.75); */
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(5.3px);
+	}
+
+	.container div::before{
+       content: 'click to delete this item';
+	   position:absolute;
+	   top: 0;
+	   left: 0;
+	   height:calc(100% - 8px);
+	   width: 100%;
+	   padding-top: 8px;
+	   background-color: red;
+	   text-align: center;
+	   display: none;
+	   border-radius: 5px;
+	}
+
+	.container div:hover::before{
+		display: block;
+		cursor: pointer;
+	}
+
+	#input_data{
+		height:40px;
+		width: 100%;
+		text-align: center;
+	}
+
+	#input_data::placeholder{
+		text-align: center;
+	}
+
+	#btn{
+		height: 40px;
+		width: 100%;
+		cursor: pointer;
+		background-color:blue;
+		border: none;
+		color: white;
+	}
+</style>
+<script>
+
+    const input=document.querySelector('#input_data');
+	const container=document.querySelector('.container');
+	const button=document.querySelector('#btn');
+    
+
+	button.addEventListener('click',()=>{
+
+             var val=input.value;
+
+			 if(val.length===0){
+				 alert("please enter the item");
+			 }
+
+			 else{
+				var div=document.createElement('div');
+			    div.innerText=val;
+			    input.value="";
+			    container.appendChild(div);
+			    var divs=container.querySelectorAll('div');
+
+			     for(let i=0;i<divs.length;i++){
+            
+			        divs[i].addEventListener('click',(e)=>{
+					container.removeChild(e.target);
+			      });
+	           }
+			 }
+			 
+	});
+
+</script>
+</html>
